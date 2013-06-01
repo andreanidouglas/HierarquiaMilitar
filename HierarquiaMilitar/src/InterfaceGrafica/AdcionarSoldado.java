@@ -4,21 +4,40 @@
  */
 package InterfaceGrafica;
 
+import MilitarPackage.Exercito;
+import MilitarPackage.ForcaAerea;
+import MilitarPackage.Marinha;
+import java.awt.Color;
+import java.awt.Font;
+import java.util.ArrayList;
+import java.util.Vector;
+import javax.swing.BorderFactory;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 
 /**
  *
  * @author Douglas
  */
-public class AdcionarSoldado extends javax.swing.JFrame
-{
+public class AdcionarSoldado extends javax.swing.JFrame {
 
     /**
      * Creates new form AdcionarSoldado
      */
-    public AdcionarSoldado()
-    {
+    private ArrayList<JLabel> valoresLista = new ArrayList();
+
+
+    public AdcionarSoldado() {
         initComponents();
+        lblImagemSoldado.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+        lblImagemSoldado.setBounds(0, 0, jLayeredPane1.getWidth(), jLayeredPane1.getHeight());
+        jLayeredPane1.add(lblImagemSoldado);
+        jLayeredPane1.moveToBack(lblImagemSoldado);
+
+        jCheckBox1.setVisible(false);
+        jCheckBox2.setVisible(false);
     }
 
     /**
@@ -28,11 +47,11 @@ public class AdcionarSoldado extends javax.swing.JFrame
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents()
-    {
+    private void initComponents() {
 
         buttonGroup1 = new javax.swing.ButtonGroup();
-        lblImagemSoldado = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jList1 = new javax.swing.JList();
         jLabel2 = new javax.swing.JLabel();
         txtNomeSoldado = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
@@ -50,18 +69,25 @@ public class AdcionarSoldado extends javax.swing.JFrame
         jLabel7 = new javax.swing.JLabel();
         lblEspec = new javax.swing.JLabel();
         cboEscolha = new javax.swing.JComboBox();
+        jCheckBox1 = new javax.swing.JCheckBox();
+        jCheckBox2 = new javax.swing.JCheckBox();
+        btnOK = new javax.swing.JButton();
+        btnAdd = new javax.swing.JButton();
+        jLayeredPane1 = new javax.swing.JLayeredPane();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        jList1.setModel(new javax.swing.AbstractListModel() {
+            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+            public int getSize() { return strings.length; }
+            public Object getElementAt(int i) { return strings[i]; }
+        });
+        jScrollPane1.setViewportView(jList1);
 
-        lblImagemSoldado.setText("jLabel1");
-        lblImagemSoldado.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jLabel2.setFont(new java.awt.Font("Calibri", 1, 24)); // NOI18N
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setText("Adcionar Soldado");
         jLabel2.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-
-        txtNomeSoldado.setText("jTextField1");
 
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel1.setText("Nome do Soldado:");
@@ -69,70 +95,69 @@ public class AdcionarSoldado extends javax.swing.JFrame
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel3.setText("Sobrenome:");
 
-        txtSobrenome.setText("jTextField1");
-
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel4.setText("Patente:");
-
-        txtPatente.setText("jTextField1");
 
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel5.setText("Nacionalidade:");
 
-        txtNacionalidade.setText("jTextField1");
-
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel6.setText("Especialização:");
 
-        txtEspecializacao.setText("jTextField1");
-
         buttonGroup1.add(jRadioButton1);
         jRadioButton1.setText("Exército");
-        jRadioButton1.addMouseListener(new java.awt.event.MouseAdapter()
-        {
-            public void mouseClicked(java.awt.event.MouseEvent evt)
-            {
+        jRadioButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
                 RadioButtonClick(evt);
             }
-            public void mouseReleased(java.awt.event.MouseEvent evt)
-            {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
                 RadioButtonClick(evt);
             }
         });
 
         buttonGroup1.add(jRadioButton2);
         jRadioButton2.setText("Marinha");
-        jRadioButton2.addMouseListener(new java.awt.event.MouseAdapter()
-        {
-            public void mouseClicked(java.awt.event.MouseEvent evt)
-            {
+        jRadioButton2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
                 RadioButtonClick(evt);
             }
-            public void mouseReleased(java.awt.event.MouseEvent evt)
-            {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
                 RadioButtonClick(evt);
             }
         });
 
         buttonGroup1.add(jRadioButton3);
         jRadioButton3.setText("Aeronáutica");
-        jRadioButton3.addMouseListener(new java.awt.event.MouseAdapter()
-        {
-            public void mouseClicked(java.awt.event.MouseEvent evt)
-            {
+        jRadioButton3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
                 RadioButtonClick(evt);
             }
-            public void mouseReleased(java.awt.event.MouseEvent evt)
-            {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
                 RadioButtonClick(evt);
             }
         });
 
         jLabel7.setText("Forças Armadas:");
 
-        lblEspec.setText("jLabel8");
+        lblEspec.setText("Especialização");
 
-        cboEscolha.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jCheckBox1.setText("jCheckBox1");
+
+        jCheckBox2.setText("jCheckBox2");
+
+        btnOK.setText("OK");
+        btnOK.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnOKActionPerformed(evt);
+            }
+        });
+
+        btnAdd.setText("Adcionar");
+        btnAdd.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAddActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -143,36 +168,46 @@ public class AdcionarSoldado extends javax.swing.JFrame
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(txtSobrenome, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 207, Short.MAX_VALUE)
+                            .addComponent(txtNacionalidade, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtPatente)
+                            .addComponent(txtNomeSoldado)
+                            .addComponent(txtEspecializacao, javax.swing.GroupLayout.Alignment.LEADING))
+                        .addGap(31, 31, 31))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(txtSobrenome, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 207, Short.MAX_VALUE)
-                                    .addComponent(txtNacionalidade, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtPatente)
-                                    .addComponent(txtNomeSoldado)
-                                    .addComponent(txtEspecializacao, javax.swing.GroupLayout.Alignment.LEADING)))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(lblEspec, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jRadioButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jRadioButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jRadioButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addGroup(layout.createSequentialGroup()
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addComponent(jRadioButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                            .addComponent(jRadioButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                            .addComponent(jRadioButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                        .addGap(0, 36, Short.MAX_VALUE))
-                                    .addComponent(cboEscolha, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addGap(18, 18, 18)
-                                .addComponent(lblImagemSoldado, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(0, 22, Short.MAX_VALUE)))
-                .addGap(0, 0, 0))
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jCheckBox2)
+                                            .addComponent(jCheckBox1)
+                                            .addComponent(cboEscolha, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGap(0, 2, Short.MAX_VALUE)))
+                                .addGap(9, 9, 9))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(15, 15, 15)
+                                .addComponent(btnAdd)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addComponent(jLayeredPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(23, 23, 23))))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(142, 142, 142)
+                .addComponent(btnOK, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -200,21 +235,31 @@ public class AdcionarSoldado extends javax.swing.JFrame
                     .addComponent(jLabel6)
                     .addComponent(txtEspecializacao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jRadioButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jRadioButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jRadioButton3)
-                        .addGap(18, 18, 18)
+                        .addGap(15, 15, 15)
                         .addComponent(lblEspec)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(cboEscolha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(lblImagemSoldado, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(41, Short.MAX_VALUE))
+                        .addComponent(cboEscolha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(16, 16, 16)
+                        .addComponent(btnAdd, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jCheckBox1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jCheckBox2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLayeredPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 272, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)))
+                .addComponent(btnOK, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         pack();
@@ -222,69 +267,138 @@ public class AdcionarSoldado extends javax.swing.JFrame
 
     private void RadioButtonClick(java.awt.event.MouseEvent evt)//GEN-FIRST:event_RadioButtonClick
     {//GEN-HEADEREND:event_RadioButtonClick
-        
-        if (jRadioButton1.isSelected())
-        {
+        Vector valoresComboBox = new Vector();
+        DefaultComboBoxModel model;
+        if (jRadioButton1.isSelected()) {
+            lblEspec.setText("Armamentos");
             setSoldadoImg("Exercito");
-        }
-        else if(jRadioButton2.isSelected())
-        {
+            valoresComboBox.add("Metralhadora");
+            valoresComboBox.add("Pistola");
+            valoresComboBox.add("Shotgun");
+            valoresComboBox.add("Sniper");
+            valoresComboBox.add("Fuzil");
+            valoresComboBox.add("Granada");
+            jCheckBox1.setText("Soldado de Elite");
+            jCheckBox2.setText("Atirador de Elite");
+            jCheckBox1.setVisible(true);
+            jCheckBox2.setVisible(true);
+        } else if (jRadioButton2.isSelected()) {
+            lblEspec.setText("Embarcações");
             setSoldadoImg("Marinha");
-        }
-        else if(jRadioButton3.isSelected())
-        {
+            valoresComboBox.add("Cargueiro");
+            valoresComboBox.add("Fragata");
+            valoresComboBox.add("Porta Aviões");
+            valoresComboBox.add("Bombardeiro");
+            jCheckBox1.setVisible(false);
+            jCheckBox2.setVisible(false);
+        } else if (jRadioButton3.isSelected()) {
             setSoldadoImg("Aeronautica");
+            lblEspec.setText("Aeronaves");
+            valoresComboBox.add("Jato de Caça");
+            valoresComboBox.add("Cargueiro");
+            valoresComboBox.add("Transporte de Tripulação");
+            valoresComboBox.add("Helicoptero");
+            valoresComboBox.add("Bombardeiro");
+            jCheckBox1.setText("Piloto de Helicoptero");
+            jCheckBox2.setText("Piloto de Avião");
+            jCheckBox1.setVisible(true);
+            jCheckBox2.setVisible(true);
         }
-      
+        limparArrayLabels();
+        model = new DefaultComboBoxModel(valoresComboBox);
+        cboEscolha.setModel(model);
     }//GEN-LAST:event_RadioButtonClick
 
+    private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
+
+        int tamanhoLista = 0;
+
+        valoresLista.add(new JLabel());
+
+        if (!(jRadioButton1.isSelected() || jRadioButton2.isSelected() || jRadioButton3.isSelected())) {
+            return;
+        }
+
+        if (jRadioButton1.isSelected()) {
+            setSoldadoImg("Exercito_fade");
+        } else if (jRadioButton2.isSelected()) {
+            setSoldadoImg("Marinha_fade");
+        } else if (jRadioButton3.isSelected()) {
+            setSoldadoImg("Aeronautica_fade");
+        }
+
+        tamanhoLista = valoresLista.size();
+        if (18 * valoresLista.size() < jLayeredPane1.getHeight()) {
+            valoresLista.get(tamanhoLista - 1).setBounds(10, 15 * tamanhoLista, 100, 15);
+        } else {
+            JOptionPane.showMessageDialog(null, "Impossivel adcionar mais itens!".toUpperCase(), "Impossivel adcionar mais itens.", JOptionPane.WARNING_MESSAGE);
+        }
+        valoresLista.get(tamanhoLista - 1).setFont(new Font("Calibri", Font.BOLD, 14));
+        valoresLista.get(tamanhoLista - 1).setText(cboEscolha.getSelectedItem().toString());
+        jLayeredPane1.add(valoresLista.get(tamanhoLista - 1));
+        jLayeredPane1.moveToFront(valoresLista.get(tamanhoLista - 1));
+    }//GEN-LAST:event_btnAddActionPerformed
+
+    private void btnOKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOKActionPerformed
+    
+        if (!(jRadioButton1.isSelected() || jRadioButton2.isSelected() || jRadioButton3.isSelected())) {
+            return;
+        }
+        if (jRadioButton1.isSelected()) {
+            Exercito exec = new Exercito();
+
+            exec.setSoldadoDeElite(jCheckBox1.isSelected());
+            exec.setAtiradorDeElite(jCheckBox2.isSelected());
+
+            for (int i = 0; i < valoresLista.size(); i++) {
+                exec.adcionarArmamento(valoresLista.get(i).getText());
+            }
+            exec.setNome(txtNomeSoldado.getText());
+            exec.setNacionalidade(txtNacionalidade.getText());
+            exec.setSobrenome(txtSobrenome.getText());
+            exec.setEspecializacao(txtEspecializacao.getText());
+            exec.setPatente(txtPatente.getText());
+            MainInterfaceGUI.soldados.add(exec); 
+
+        } else if (jRadioButton2.isSelected()) {
+            Marinha exec = new Marinha();
+            for (int i = 0; i < valoresLista.size(); i++) {
+                exec.adcionarEmbarcacao(valoresLista.get(i).getText());
+            }
+            exec.setNome(txtNomeSoldado.getText());
+            exec.setNacionalidade(txtNacionalidade.getText());
+            exec.setSobrenome(txtSobrenome.getText());
+            exec.setEspecializacao(txtEspecializacao.getText());
+            exec.setPatente(txtPatente.getText());      
+            MainInterfaceGUI.soldados.add(exec);
+            
+        } else if (jRadioButton3.isSelected()) {
+            ForcaAerea exec = new ForcaAerea();
+            exec.setPilotoAviao(jCheckBox1.isSelected());
+            exec.setPilotoHelicoptero(jCheckBox2.isSelected());
+            for (int i = 0; i < valoresLista.size(); i++) {
+                exec.adcionarAeronave(valoresLista.get(i).getText());
+            }
+            exec.setNome(txtNomeSoldado.getText());
+            exec.setNacionalidade(txtNacionalidade.getText());
+            exec.setSobrenome(txtSobrenome.getText());
+            exec.setEspecializacao(txtEspecializacao.getText());
+            exec.setPatente(txtPatente.getText());
+            MainInterfaceGUI.soldados.add(exec);
+           
+        }
+        this.dispose();
+    }//GEN-LAST:event_btnOKActionPerformed
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[])
-    {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try
-        {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels())
-            {
-                if ("Nimbus".equals(info.getName()))
-                {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex)
-        {
-            java.util.logging.Logger.getLogger(AdcionarSoldado.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex)
-        {
-            java.util.logging.Logger.getLogger(AdcionarSoldado.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex)
-        {
-            java.util.logging.Logger.getLogger(AdcionarSoldado.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex)
-        {
-            java.util.logging.Logger.getLogger(AdcionarSoldado.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable()
-        {
-            public void run()
-            {
-                new AdcionarSoldado().setVisible(true);
-            }
-        });
-    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAdd;
+    private javax.swing.JButton btnOK;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JComboBox cboEscolha;
+    private javax.swing.JCheckBox jCheckBox1;
+    private javax.swing.JCheckBox jCheckBox2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -292,45 +406,50 @@ public class AdcionarSoldado extends javax.swing.JFrame
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLayeredPane jLayeredPane1;
+    private javax.swing.JList jList1;
     private javax.swing.JRadioButton jRadioButton1;
     private javax.swing.JRadioButton jRadioButton2;
     private javax.swing.JRadioButton jRadioButton3;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblEspec;
-    private javax.swing.JLabel lblImagemSoldado;
     private javax.swing.JTextField txtEspecializacao;
     private javax.swing.JTextField txtNacionalidade;
     private javax.swing.JTextField txtNomeSoldado;
     private javax.swing.JTextField txtPatente;
     private javax.swing.JTextField txtSobrenome;
     // End of variables declaration//GEN-END:variables
+    public javax.swing.JLabel lblImagemSoldado = new JLabel();
 
-    public void setSoldadoImg(String forcaArmada)
-    {
+    public void setSoldadoImg(String forcaArmada) {
         String urlImagem;
         urlImagem = "..\\zMisc\\Imagens\\" + forcaArmada + ".png";
 
         ImageIcon icone = createImageIcon(urlImagem, "soldado");
 
-        if (icone !=null)
-        {
-             lblImagemSoldado.setIcon(icone);
-             lblImagemSoldado.setText("");
-        }
-        else
-        {
+        if (icone != null) {
+            lblImagemSoldado.setIcon(icone);
+            lblImagemSoldado.setText("");
+        } else {
             lblImagemSoldado.setText("Erro Imagem Não encontrada" + urlImagem);
         }
     }
-    protected ImageIcon createImageIcon(String path, String description)
-    {
-       java.net.URL imgURL = getClass().getResource(path);
-       if (imgURL != null) {
-           return new ImageIcon(imgURL, description);
-       } else {
-           return null;
-       }
-   }
-    
-    
 
+    protected ImageIcon createImageIcon(String path, String description) {
+        java.net.URL imgURL = getClass().getResource(path);
+        if (imgURL != null) {
+            return new ImageIcon(imgURL, description);
+        } else {
+            return null;
+        }
+    }
+
+    public void limparArrayLabels() {
+        for (int i = 0; i < valoresLista.size(); i++) {
+            jLayeredPane1.remove(valoresLista.get(i));
+        }
+        jLayeredPane1.revalidate();
+        jLayeredPane1.repaint();
+        valoresLista.clear();
+    }
 }

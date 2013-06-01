@@ -1,17 +1,12 @@
 package MilitarPackage;
 
-public abstract class Militares {
+public class Militares {
     private String patente;
     private String nome;
     private String sobrenome;
     private String nacionalidade;
     private String especializacao;
 
-    public Militares()
-    {
-        
-    }
-    
     public String getPatente()
     {
         return patente;
@@ -61,6 +56,4 @@ public abstract class Militares {
     {
         this.especializacao = especializacao;
     }
-
-     
 }

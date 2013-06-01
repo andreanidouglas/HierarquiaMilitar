@@ -8,17 +8,21 @@ public class Exercito extends Militares {
     private boolean soldadoDeElite;
     private boolean atiradorDeElite;
 
+    public void setArmamentos(ArrayList<String> armamentos) {
+        this.armamentos = armamentos;
+    }
+
     public ArrayList<String> getArmamentos()
     {
         return armamentos;
     }
 
-     public void adcionarEmbarcacao(String armamento)
+     public void adcionarArmamento(String armamento)
     {
         this.armamentos.add(armamento);
     }
     
-    public boolean removerAeronave (String armamento)
+    public boolean removerArmamento (String armamento)
     {
        String armamentoI;
        armamento = armamento.toUpperCase();

@@ -16,7 +16,7 @@ public class Marinha extends Militares {
         this.embarcacoes.add(embarcacao);
     }
     
-    public boolean removerAeronave (String embarcacao)
+    public boolean removerEmbarcacao(String embarcacao)
     {
        String embarcacaoI;
        embarcacao = embarcacao.toUpperCase();
