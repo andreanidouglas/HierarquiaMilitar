@@ -52,8 +52,25 @@ public class PrologFile {
     
     public void escritorArquivo(String linhaASerEscrita) throws IOException
     {
-        FileWriter escritor = new FileWriter(fileName, true);
-        escritor.write(linhaASerEscrita + System.getProperty("line.separator"));
-        escritor.close();
+        try (FileWriter escritor = new FileWriter(fileName, true)) {
+            escritor.write(linhaASerEscrita + System.getProperty("line.separator"));
+        }
+    }
+    
+    public void escreverRegras() throws IOException
+    {
+        
+       this.escritorArquivo("dificuldade(facil).");
+       this.escritorArquivo("dificuldade(medio)." );
+       this.escritorArquivo("dificuldade(dificil)." );
+        
+       this.escritorArquivo("requisitos(X, Y):-aitradorElite(X),Y == 'atiradorElite';"
+               + "(soldadoElite(X), Y == 'soldadoElite');"
+               + "(pilotoAviao(X), Y == 'pilotoAviao');"
+               + "(pilotoHelicoptero(X), Y == 'pilotoHelicoptero');"
+               + "(veiculos(X,K), nth0(Zindex,Klist,'granada'), Zindex > 0, Y == 'infantaria');"
+               + "(veiculos(X,K), nth0(Zindex,Klist,'cargueiro'), Zindex > 0, Y == 'transporte de carga');"
+               + "(veiculos(X,K), nth0(Zindex,Klist,'transporte de tripulação'), Zindex > 0, Y == 'transporte de tripulacao');"
+               + "." );
     }
 }

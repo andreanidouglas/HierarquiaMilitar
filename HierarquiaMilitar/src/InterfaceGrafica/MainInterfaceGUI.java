@@ -36,7 +36,7 @@ public final class MainInterfaceGUI extends JFrame implements WindowListener
     protected static ArrayList soldados = new ArrayList();
     protected ArrayList<JPanel> frames = new ArrayList();
     private int numeroDeFrames;
-    private final String arquivoProlog = "c:\\soldados.pro";
+    private final String arquivoProlog = "src\\zMisc\\PrologFiles\\soldados.pro";
     protected JFrame tela2;
     /**
      * Creates new form MainInterfaceGUI
@@ -61,6 +61,7 @@ public final class MainInterfaceGUI extends JFrame implements WindowListener
         jLayeredPanel = new javax.swing.JLayeredPane();
         lblEsquadraoVazio = new javax.swing.JLabel();
         btnStart = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -90,6 +91,15 @@ public final class MainInterfaceGUI extends JFrame implements WindowListener
         });
         btnStart.setBounds(30, 450, 167, 63);
         jLayeredPanel.add(btnStart, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        jButton1.setText("Operacao");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        jButton1.setBounds(530, 450, 160, 60);
+        jLayeredPanel.add(jButton1, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout panelPrincipalLayout = new javax.swing.GroupLayout(panelPrincipal);
         panelPrincipal.setLayout(panelPrincipalLayout);
@@ -121,6 +131,12 @@ public final class MainInterfaceGUI extends JFrame implements WindowListener
          tela2.addWindowListener(this);
          tela2.setVisible(true);
     }//GEN-LAST:event_btnStartActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        MontarOperacao tela3 = new MontarOperacao();
+        tela3.setVisible(true);
+
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -160,6 +176,7 @@ public final class MainInterfaceGUI extends JFrame implements WindowListener
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnStart;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLayeredPane jLayeredPanel;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel lblEsquadraoVazio;
@@ -311,7 +328,7 @@ public final class MainInterfaceGUI extends JFrame implements WindowListener
     @Override
     public void windowDeactivated(WindowEvent we) {
     }
-
+    
     private void adcionarSoldadoProlog() throws IOException {
         int numeroSoldados = soldados.size();
         Militares soldado = (Militares) soldados.get(numeroSoldados - 1);
@@ -377,7 +394,6 @@ public final class MainInterfaceGUI extends JFrame implements WindowListener
             }
         }
     }
-
 }
 
 

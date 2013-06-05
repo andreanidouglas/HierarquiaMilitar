@@ -1,0 +1,4 @@
+marinha().
+patente(, ).
+especializacao(,).
+veiculos(, []).
