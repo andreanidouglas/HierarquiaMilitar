@@ -8,11 +8,15 @@ import MilitarPackage.Exercito;
 import MilitarPackage.ForcaAerea;
 import MilitarPackage.Marinha;
 import MilitarPackage.Militares;
+import PrologPackage.PrologFile;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JCheckBox;
@@ -29,9 +33,10 @@ public final class MainInterfaceGUI extends JFrame implements WindowListener
     
   
     JLabel lblBackgroundImg = new JLabel();
-    protected static ArrayList<Militares> soldados = new ArrayList();
+    protected static ArrayList soldados = new ArrayList();
     protected ArrayList<JPanel> frames = new ArrayList();
     private int numeroDeFrames;
+    private final String arquivoProlog = "c:\\soldados.pro";
     protected JFrame tela2;
     /**
      * Creates new form MainInterfaceGUI
@@ -205,7 +210,7 @@ public final class MainInterfaceGUI extends JFrame implements WindowListener
         setBounds(0, 0, 800, 600);
     }
     
-    public void adcionarSoldado()
+    public void adcionarSoldadoTela()
     {
         int tamanhoArray;
         int numeroColunas;
@@ -230,7 +235,7 @@ public final class MainInterfaceGUI extends JFrame implements WindowListener
         frames.get(numeroDeFrames).setBounds(30+(60*numeroLinhas), 120+(numeroColunas*110), 50, 110);
         imagem.setBounds(0,0,40,90);
         imagem.setOpaque(false);
-        setLblBackgroundImg(getTipoSoldado(soldados.get(tamanhoArray-1)) + "_tiny", imagem);
+        setLblBackgroundImg(getTipoSoldado((Militares) soldados.get(tamanhoArray-1)) + "_tiny", imagem);
         caixaSelecao.setBounds(16, 85, 4, 4);
        
         caixaSelecao.addActionListener(new java.awt.event.ActionListener() {
@@ -282,7 +287,12 @@ public final class MainInterfaceGUI extends JFrame implements WindowListener
     public void windowClosed(WindowEvent we) {
         if (we.getWindow().equals(tela2))
         {
-            adcionarSoldado();
+            adcionarSoldadoTela();
+            try {
+                adcionarSoldadoProlog();
+            } catch (IOException ex) {
+                Logger.getLogger(MainInterfaceGUI.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     }
 
@@ -300,6 +310,72 @@ public final class MainInterfaceGUI extends JFrame implements WindowListener
 
     @Override
     public void windowDeactivated(WindowEvent we) {
+    }
+
+    private void adcionarSoldadoProlog() throws IOException {
+        int numeroSoldados = soldados.size();
+        Militares soldado = (Militares) soldados.get(numeroSoldados - 1);
+        String veiculos = "";
+        if (!PrologFile.verificaExistenciaDoArquivo(arquivoProlog))
+        {
+            PrologFile.criaArquivo(arquivoProlog);
+        }
+        
+        PrologFile arquivoPro = new PrologFile(arquivoProlog);
+        
+        arquivoPro.escritorArquivo(getTipoSoldado(soldado).toLowerCase() + "(" + soldado.getSobrenome().toLowerCase() + soldado.getNome() + ").");
+        arquivoPro.escritorArquivo("patente" + "(" +soldado.getPatente().toString().toLowerCase() +", "+  soldado.getSobrenome().toLowerCase() + soldado.getNome() + ").");
+        arquivoPro.escritorArquivo("especializacao" +  "(" + soldado.getEspecializacao().toString().toLowerCase() + "," + soldado.getSobrenome().toLowerCase() + soldado.getNome() + ").");
+        
+        if(soldados.get(numeroSoldados -1) instanceof Exercito)
+        {
+            Exercito exercito = (Exercito) soldados.get(numeroSoldados -1);
+            if (exercito.isAtiradorDeElite())
+            {
+                arquivoPro.escritorArquivo("atiradorElite" +  "(" + soldado.getSobrenome().toLowerCase() + soldado.getNome() + ").");
+            }
+            if (exercito.isSoldadoDeElite())
+            {
+                arquivoPro.escritorArquivo("soldadoElite" +  "(" + soldado.getSobrenome().toLowerCase() + soldado.getNome() + ").");
+            }
+            for (int i=0; i <exercito.getArmamentos().size() ; i++)
+            {
+                veiculos = veiculos + ", " + exercito.getArmamentos().get(i);
+            }
+                arquivoPro.escritorArquivo(
+                        "veiculos(" + soldado.getSobrenome().toLowerCase() + soldado.getNome() + ", " + 
+                        "[" + veiculos + "]).");       
+        }
+        else if(soldados.get(numeroSoldados -1) instanceof Marinha)
+        {
+            Marinha exercito = (Marinha) soldados.get(numeroSoldados -1);
+            for (int i=0; i <exercito.getEmbarcacoes().size() ; i++)
+            {
+                veiculos = veiculos + ", " + exercito.getEmbarcacoes().get(i);
+            }
+                arquivoPro.escritorArquivo(
+                        "veiculos(" + soldado.getSobrenome().toLowerCase() + soldado.getNome() + ", " + 
+                        "[" + veiculos + "]).");       
+        }
+        else if(soldados.get(numeroSoldados -1) instanceof ForcaAerea)
+        {
+            ForcaAerea exercito = (ForcaAerea) soldados.get(numeroSoldados -1);
+            for (int i=0; i <exercito.getAeronaves().size() ; i++)
+            {
+                veiculos = veiculos + ", " + exercito.getAeronaves().get(i);
+            }
+                arquivoPro.escritorArquivo(
+                        "veiculos(" + soldado.getSobrenome().toLowerCase() + soldado.getNome() + ", " + 
+                        "[" + veiculos + "]).");       
+            if (exercito.isPilotoAviao())
+            {
+                arquivoPro.escritorArquivo("pilotoAviao" +  "(" + soldado.getSobrenome().toLowerCase() + soldado.getNome() + ").");
+            }
+            if (exercito.isPilotoHelicoptero())
+            {
+                arquivoPro.escritorArquivo("pilotoHelicoptero" +  "(" + soldado.getSobrenome().toLowerCase() + soldado.getNome() + ").");
+            }
+        }
     }
 
 }
